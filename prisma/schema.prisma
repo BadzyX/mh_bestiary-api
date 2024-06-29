@@ -1,0 +1,60 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Character {
+  id        Int      @id @default(autoincrement())
+  name      String   @unique
+  possesses Boolean?
+  weapons   String[]
+  village   String
+}
+
+model Game {
+  id       Int      @id @default(autoincrement())
+  name     String   @unique
+  platform String[]
+}
+
+model Map {
+  id   Int    @id @default(autoincrement())
+  name String @unique
+  type String
+}
+
+model Merchant {
+  id         Int    @id @default(autoincrement())
+  name       String @unique
+  type       String
+  village    String
+  generation Int
+}
+
+model Monster {
+  id   Int      @id @default(autoincrement())
+  name String   @unique
+  map  String[]
+}
+
+model Place {
+  id         Int    @id @default(autoincrement())
+  name       String @unique
+  type       String
+  generation Int
+}
+
+model Weapon {
+  id   Int    @id @default(autoincrement())
+  name String @unique
+}
